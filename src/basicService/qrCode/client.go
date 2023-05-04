@@ -3,10 +3,10 @@ package qrCode
 import (
 	"context"
 	"fmt"
+	"github.com/ArtisanCloud/PowerDouYin/src/basicService/qrCode/request"
+	"github.com/ArtisanCloud/PowerDouYin/src/basicService/qrCode/response"
+	"github.com/ArtisanCloud/PowerDouYin/src/kernel"
 	"github.com/ArtisanCloud/PowerLibs/v3/object"
-	"github.com/ArtisanCloud/PowerWeChat/v3/src/basicService/qrCode/request"
-	"github.com/ArtisanCloud/PowerWeChat/v3/src/basicService/qrCode/response"
-	"github.com/ArtisanCloud/PowerWeChat/v3/src/kernel"
 	"math"
 	"net/url"
 )

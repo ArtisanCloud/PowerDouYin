@@ -2,8 +2,8 @@ package messages
 
 import (
 	"encoding/base64"
+	"github.com/ArtisanCloud/PowerDouYin/src/kernel/power"
 	"github.com/ArtisanCloud/PowerLibs/v3/object"
-	"github.com/ArtisanCloud/PowerWeChat/v3/src/kernel/power"
 )
 
 type DeviceText struct {

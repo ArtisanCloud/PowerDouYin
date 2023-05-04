@@ -1,6 +1,6 @@
 package providers
 
-import "github.com/ArtisanCloud/PowerWeChat/v3/src/kernel"
+import "github.com/ArtisanCloud/PowerDouYin/src/kernel"
 
 func RegisterConfigProvider(app kernel.ApplicationInterface) *kernel.Config {
 

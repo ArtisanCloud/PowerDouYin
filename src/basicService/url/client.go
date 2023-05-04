@@ -2,9 +2,9 @@ package url
 
 import (
 	"context"
+	"github.com/ArtisanCloud/PowerDouYin/src/basicService/url/response"
+	"github.com/ArtisanCloud/PowerDouYin/src/kernel"
 	"github.com/ArtisanCloud/PowerLibs/v3/object"
-	"github.com/ArtisanCloud/PowerWeChat/v3/src/basicService/url/response"
-	"github.com/ArtisanCloud/PowerWeChat/v3/src/kernel"
 	"math"
 )
 

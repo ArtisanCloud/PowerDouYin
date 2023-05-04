@@ -4,12 +4,12 @@ import (
 	"context"
 	"crypto"
 	"encoding/base64"
+	response2 "github.com/ArtisanCloud/PowerDouYin/src/kernel/response"
+	payment "github.com/ArtisanCloud/PowerDouYin/src/payment/kernel"
+	"github.com/ArtisanCloud/PowerDouYin/src/payment/transfer/request"
+	"github.com/ArtisanCloud/PowerDouYin/src/payment/transfer/response"
 	"github.com/ArtisanCloud/PowerLibs/v3/object"
 	"github.com/ArtisanCloud/PowerLibs/v3/security/sign"
-	response2 "github.com/ArtisanCloud/PowerWeChat/v3/src/kernel/response"
-	payment "github.com/ArtisanCloud/PowerWeChat/v3/src/payment/kernel"
-	"github.com/ArtisanCloud/PowerWeChat/v3/src/payment/transfer/request"
-	"github.com/ArtisanCloud/PowerWeChat/v3/src/payment/transfer/response"
 	"net/http"
 )
 

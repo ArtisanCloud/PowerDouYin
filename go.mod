@@ -1,13 +1,11 @@
-module github.com/ArtisanCloud/PowerWeChat/v3
+module github.com/ArtisanCloud/PowerDouYin
 
-go 1.17
+go 1.19
 
 //replace github.com/ArtisanCloud/PowerLibs/v3 => ../PowerLibs
-//replace github.com/ArtisanCloud/PowerSocialite/v3 => ../PowerSocialite
 
 require (
 	github.com/ArtisanCloud/PowerLibs/v3 v3.0.7
-	github.com/ArtisanCloud/PowerSocialite/v3 v3.0.5
 	github.com/go-playground/assert/v2 v2.0.1
 	github.com/stretchr/testify v1.8.0
 )

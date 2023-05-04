@@ -2,35 +2,16 @@ package customerServiceMessage
 
 import (
 	"context"
+	"github.com/ArtisanCloud/PowerDouYin/src/kernel"
+	"github.com/ArtisanCloud/PowerDouYin/src/kernel/power"
+	response2 "github.com/ArtisanCloud/PowerDouYin/src/kernel/response"
+	"github.com/ArtisanCloud/PowerDouYin/src/miniProgram/customerServiceMessage/request"
+	"github.com/ArtisanCloud/PowerDouYin/src/miniProgram/customerServiceMessage/response"
 	"github.com/ArtisanCloud/PowerLibs/v3/object"
-	"github.com/ArtisanCloud/PowerWeChat/v3/src/kernel"
-	"github.com/ArtisanCloud/PowerWeChat/v3/src/kernel/power"
-	response2 "github.com/ArtisanCloud/PowerWeChat/v3/src/kernel/response"
-	"github.com/ArtisanCloud/PowerWeChat/v3/src/miniProgram/customerServiceMessage/request"
-	"github.com/ArtisanCloud/PowerWeChat/v3/src/miniProgram/customerServiceMessage/response"
-	response4 "github.com/ArtisanCloud/PowerWeChat/v3/src/work/media/response"
-	"net/http"
 )
 
 type Client struct {
 	BaseClient *kernel.BaseClient
-}
-
-// 获取客服消息内的临时素材
-// https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/customer-message/customerServiceMessage.getTempMedia.html
-func (comp *Client) GetTempMedia(ctx context.Context, mediaID string) (*http.Response, error) {
-
-	var header = &response4.ResponseHeaderMedia{}
-
-	params := &object.HashMap{
-		"query": &object.StringMap{
-			"media_id": mediaID,
-		},
-	}
-
-	rs, err := comp.BaseClient.RequestRaw(ctx, "cgi-bin/media/get", http.MethodPost, params, &header, nil)
-
-	return rs, err
 }
 
 // 发送客服消息给用户

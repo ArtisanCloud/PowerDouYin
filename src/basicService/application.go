@@ -1,14 +1,14 @@
 package basicService
 
 import (
+	"github.com/ArtisanCloud/PowerDouYin/src/basicService/contentSecurity"
+	"github.com/ArtisanCloud/PowerDouYin/src/basicService/jssdk"
+	"github.com/ArtisanCloud/PowerDouYin/src/basicService/media"
+	"github.com/ArtisanCloud/PowerDouYin/src/basicService/qrCode"
+	"github.com/ArtisanCloud/PowerDouYin/src/basicService/url"
+	"github.com/ArtisanCloud/PowerDouYin/src/kernel"
+	"github.com/ArtisanCloud/PowerDouYin/src/kernel/providers"
 	"github.com/ArtisanCloud/PowerLibs/v3/object"
-	"github.com/ArtisanCloud/PowerWeChat/v3/src/basicService/contentSecurity"
-	"github.com/ArtisanCloud/PowerWeChat/v3/src/basicService/jssdk"
-	"github.com/ArtisanCloud/PowerWeChat/v3/src/basicService/media"
-	"github.com/ArtisanCloud/PowerWeChat/v3/src/basicService/qrCode"
-	"github.com/ArtisanCloud/PowerWeChat/v3/src/basicService/url"
-	"github.com/ArtisanCloud/PowerWeChat/v3/src/kernel"
-	"github.com/ArtisanCloud/PowerWeChat/v3/src/kernel/providers"
 )
 
 type Application struct {
@@ -64,7 +64,7 @@ func NewApplication(config *UserConfig) (*Application, error) {
 		UserConfig: userConfig,
 		DefaultConfig: &object.HashMap{
 			"http": &object.HashMap{
-				"base_uri": "https://api.weixin.qq.com/",
+				"base_uri": "https://developer.toutiao.com",
 			},
 		},
 	}

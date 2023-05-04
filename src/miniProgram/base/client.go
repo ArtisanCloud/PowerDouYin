@@ -2,10 +2,10 @@ package base
 
 import (
 	"context"
+	"github.com/ArtisanCloud/PowerDouYin/src/kernel"
+	"github.com/ArtisanCloud/PowerDouYin/src/miniProgram/base/request"
+	"github.com/ArtisanCloud/PowerDouYin/src/miniProgram/base/response"
 	"github.com/ArtisanCloud/PowerLibs/v3/object"
-	"github.com/ArtisanCloud/PowerWeChat/v3/src/kernel"
-	"github.com/ArtisanCloud/PowerWeChat/v3/src/miniProgram/base/request"
-	"github.com/ArtisanCloud/PowerWeChat/v3/src/miniProgram/base/response"
 )
 
 type Client struct {
