@@ -1,9 +1,9 @@
 package messages
 
 import (
+	"github.com/ArtisanCloud/PowerDouYin/src/kernel/contract"
+	"github.com/ArtisanCloud/PowerDouYin/src/kernel/power"
 	"github.com/ArtisanCloud/PowerLibs/v3/object"
-	"github.com/ArtisanCloud/PowerWeChat/v3/src/kernel/contract"
-	"github.com/ArtisanCloud/PowerWeChat/v3/src/kernel/power"
 )
 
 const VOID = 0

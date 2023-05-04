@@ -1,7 +1,7 @@
 package messages
 
 import (
-	"github.com/ArtisanCloud/PowerWeChat/v3/src/kernel/power"
+	"github.com/ArtisanCloud/PowerDouYin/src/kernel/power"
 )
 
 type MiniProgramNotice struct {

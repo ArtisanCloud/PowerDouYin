@@ -3,27 +3,14 @@ package payment
 import (
 	"errors"
 	"fmt"
+	"github.com/ArtisanCloud/PowerDouYin/src/kernel"
+	"github.com/ArtisanCloud/PowerDouYin/src/kernel/providers"
+	"github.com/ArtisanCloud/PowerDouYin/src/payment/base"
+	"github.com/ArtisanCloud/PowerDouYin/src/payment/jssdk"
+	kernel2 "github.com/ArtisanCloud/PowerDouYin/src/payment/kernel"
+	"github.com/ArtisanCloud/PowerDouYin/src/payment/transfer"
 	"github.com/ArtisanCloud/PowerLibs/v3/logger"
 	"github.com/ArtisanCloud/PowerLibs/v3/object"
-	"github.com/ArtisanCloud/PowerWeChat/v3/src/kernel"
-	"github.com/ArtisanCloud/PowerWeChat/v3/src/kernel/models"
-	"github.com/ArtisanCloud/PowerWeChat/v3/src/kernel/providers"
-	"github.com/ArtisanCloud/PowerWeChat/v3/src/payment/base"
-	"github.com/ArtisanCloud/PowerWeChat/v3/src/payment/bill"
-	"github.com/ArtisanCloud/PowerWeChat/v3/src/payment/jssdk"
-	kernel2 "github.com/ArtisanCloud/PowerWeChat/v3/src/payment/kernel"
-	"github.com/ArtisanCloud/PowerWeChat/v3/src/payment/notify"
-	"github.com/ArtisanCloud/PowerWeChat/v3/src/payment/notify/request"
-	"github.com/ArtisanCloud/PowerWeChat/v3/src/payment/order"
-	"github.com/ArtisanCloud/PowerWeChat/v3/src/payment/partner"
-	"github.com/ArtisanCloud/PowerWeChat/v3/src/payment/profitSharing"
-	"github.com/ArtisanCloud/PowerWeChat/v3/src/payment/redpack"
-	"github.com/ArtisanCloud/PowerWeChat/v3/src/payment/refund"
-	"github.com/ArtisanCloud/PowerWeChat/v3/src/payment/reverse"
-	"github.com/ArtisanCloud/PowerWeChat/v3/src/payment/sandbox"
-	"github.com/ArtisanCloud/PowerWeChat/v3/src/payment/security"
-	"github.com/ArtisanCloud/PowerWeChat/v3/src/payment/transfer"
-	"net/http"
 	"time"
 )
 
@@ -33,23 +20,12 @@ type Payment struct {
 
 	Config *kernel.Config
 
-	Order   *order.Client
-	Partner *partner.Client
-	JSSDK   *jssdk.Client
-	Sandbox *sandbox.Client
+	JSSDK *jssdk.Client
 
-	Refund *refund.Client
-	Bill   *bill.Client
-
-	RedPack       *redpack.Client
 	Transfer      *transfer.Client
 	TransferBatch *transfer.BatchClient
-	Reverse       *reverse.Client
-	ProfitSharing *profitSharing.Client
 
 	Base *base.Client
-
-	Security *security.Client
 
 	Logger *logger.Logger
 }
@@ -109,7 +85,7 @@ func NewPayment(config *UserConfig) (*Payment, error) {
 		UserConfig: userConfig,
 		DefaultConfig: &object.HashMap{
 			"http": &object.HashMap{
-				"base_uri": "https://api.mch.weixin.qq.com",
+				"base_uri": "https://developer.toutiao.com",
 			},
 		},
 	}
@@ -139,60 +115,17 @@ func NewPayment(config *UserConfig) (*Payment, error) {
 		return nil, err
 	}
 
-	//-------------- Order --------------
-	app.Order, err = order.RegisterProvider(app)
-	if err != nil {
-		return nil, err
-	}
-	//-------------- Partner --------------
-	app.Partner, err = partner.RegisterProvider(app)
-	if err != nil {
-		return nil, err
-	}
 	//-------------- JSSDK --------------
 	app.JSSDK, err = jssdk.RegisterProvider(app)
 	if err != nil {
 		return nil, err
 	}
-	//-------------- Sandbox --------------
-	app.Sandbox, err = sandbox.RegisterProvider(app)
-	if err != nil {
-		return nil, err
-	}
-	//-------------- Refund --------------
-	app.Refund, err = refund.RegisterProvider(app)
-	if err != nil {
-		return nil, err
-	}
-	//-------------- Bill --------------
-	app.Bill, err = bill.RegisterProvider(app)
-	if err != nil {
-		return nil, err
-	}
-	//-------------- Red Pack --------------
-	app.RedPack, err = redpack.RegisterProvider(app)
+
 	if err != nil {
 		return nil, err
 	}
 	//-------------- Transfer --------------
 	app.Transfer, app.TransferBatch, err = transfer.RegisterProvider(app)
-	if err != nil {
-		return nil, err
-	}
-
-	//-------------- Reverse --------------
-	app.Reverse, err = reverse.RegisterProvider(app)
-	if err != nil {
-		return nil, err
-	}
-	//-------------- ProfitSharing --------------
-	app.ProfitSharing, err = profitSharing.RegisterProvider(app)
-	if err != nil {
-		return nil, err
-	}
-
-	//-------------- Security --------------
-	app.Security, err = security.RegisterProvider(app)
 	if err != nil {
 		return nil, err
 	}
@@ -220,29 +153,12 @@ func (app *Payment) GetComponent(name string) interface{} {
 		return app.Base
 	case "JSSDK":
 		return app.JSSDK
-	case "Sandbox":
-		return app.Sandbox
+
 	case "Config":
 		return app.Config
-	case "Order":
-		return app.Order
-	case "Partner":
-		return app.Partner
-	case "Refund":
-		return app.Refund
-	case "Bill":
-		return app.Bill
-	case "RedPack":
-		return app.RedPack
+
 	case "Transfer":
 		return app.Transfer
-	case "Reverse":
-		return app.Reverse
-	case "ProfitSharing":
-		return app.ProfitSharing
-
-	case "Security":
-		return app.Security
 
 	case "Logger":
 		return app.Logger
@@ -281,18 +197,6 @@ func (app *Payment) SetSubMerchant(mchID string, appID string) kernel2.Applicati
 	return app
 }
 
-func (app *Payment) HandlePaidNotify(request *http.Request, closure func(message *request.RequestNotify, transaction *models.Transaction, fail func(message string)) interface{}) (*http.Response, error) {
-	return notify.NewPaidNotify(app, request).Handle(closure)
-}
-
-func (app *Payment) HandleRefundedNotify(request *http.Request, closure func(message *request.RequestNotify, transaction *models.Refund, fail func(message string)) interface{}) (*http.Response, error) {
-	return notify.NewRefundNotify(app, request).Handle(closure)
-}
-
-func (app *Payment) HandleScannedNotify(request *http.Request, closure func(message *request.RequestNotify, fail func(message string), alert func(message string)) interface{}) (*http.Response, error) {
-	return notify.NewScannedNotify(app, request).Handle(closure)
-}
-
 func (app *Payment) InSandbox() bool {
 	return app.Config.GetBool("sandbox", false)
 
@@ -304,9 +208,7 @@ func (app *Payment) GetKey(endpoint string) (string, error) {
 	}
 
 	key := app.Config.GetString("key", "")
-	if app.InSandbox() {
-		key, _ = app.Sandbox.GetKey()
-	}
+
 	if key == "" {
 		return key, errors.New("config key should not empty. ")
 	}

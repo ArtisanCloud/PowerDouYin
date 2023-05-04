@@ -2,8 +2,8 @@ package miniProgram
 
 import (
 	"encoding/base64"
-	"github.com/ArtisanCloud/PowerWeChat/v3/src/kernel"
-	"github.com/ArtisanCloud/PowerWeChat/v3/src/kernel/support"
+	"github.com/ArtisanCloud/PowerDouYin/src/kernel"
+	"github.com/ArtisanCloud/PowerDouYin/src/kernel/support"
 )
 
 type Encryptor struct {

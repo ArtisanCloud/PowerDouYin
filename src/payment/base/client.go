@@ -2,9 +2,9 @@ package base
 
 import (
 	"context"
+	response2 "github.com/ArtisanCloud/PowerDouYin/src/kernel/response"
+	"github.com/ArtisanCloud/PowerDouYin/src/payment/kernel"
 	"github.com/ArtisanCloud/PowerLibs/v3/object"
-	response2 "github.com/ArtisanCloud/PowerWeChat/v3/src/kernel/response"
-	"github.com/ArtisanCloud/PowerWeChat/v3/src/payment/kernel"
 	"net/http"
 )
 

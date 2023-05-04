@@ -1,8 +1,8 @@
 package contract
 
 import (
+	response2 "github.com/ArtisanCloud/PowerDouYin/src/kernel/response"
 	"github.com/ArtisanCloud/PowerLibs/v3/object"
-	response2 "github.com/ArtisanCloud/PowerWeChat/v3/src/kernel/response"
 	"net/http"
 )
 
